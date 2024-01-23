@@ -7,7 +7,7 @@ public class Inventory {
      *    lets make the program display an error message instead of terminating
      *    01-17-24
      */
-
+    public static Scanner user = new Scanner(System.in);
 
     //private data members as Arrays so users can control their size
     private ArrayList<String> productCode = new ArrayList<>();
@@ -26,6 +26,15 @@ public class Inventory {
 
         productCode.remove(index);
         productQuantity.remove(index);
+    }
+
+    public void changeStock(int index){
+
+        System.out.println("Enter the desired amount you'd like to remove:");
+        int amount = user.nextInt();
+        amount = (productQuantity.get(index) - amount);
+
+        productQuantity.set(index, amount);
     }
 
     public void printProduct() {

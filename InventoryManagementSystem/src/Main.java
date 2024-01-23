@@ -89,31 +89,55 @@ public class Main {
 
         }while (Character.compare(exit, 'n') != 0);
 
+        System.out.println("Successfully Inputted: ");
         Company.printProduct();
     }
 
 
     public static void removeStock() {
 
-        //object declarations & variable for user input
-        Scanner user = new Scanner(System.in);
-        int index;
+        //variable for user input
+        int index, choice;
 
         //print the current inventory stock alongside numbers for the user to select from
         Company.printProduct();
-        System.out.println("Please input the number of which product you'd like to remove: ");
+
+        System.out.println("Please input the number of which product you'd like to modify: ");
 
         // allow the user to select which product they're erasing
         index = user.nextInt();
+        //subtract 1 to match the actual index of where the product is in the array
         index -= 1;
 
-        Company.removeProduct(index);
         /**
-         *
-         * GREEN
-         * Give the user the option to remove all stock or to remove a certain amount
-         * 01-21-24
+         * YELLOW
+         * Input validation either here in in the object's method
+         * User can currently input an invalid number and throw an exception for out of range
+         * 01-23-24
          */
+
+        //input validation for choice of what user would like to do with selected product
+        do {
+            System.out.println("Select your intent: ");
+            System.out.println("1. Remove Product \n2. Remove Quantity");
+            choice = user.nextInt();
+
+            if (choice != 1 && choice != 2)
+            {
+                System.out.println("Not a valid option, try again");
+            }
+        }while (choice != 1 && choice != 2);
+
+        switch (choice)
+        {
+            case 1:
+                Company.removeProduct(index);
+                break;
+            case 2:
+                Company.changeStock(index);
+            default:
+                System.out.println("Not a valid option, try again");
+        }
 
         System.out.println("Updated Stock List: ");
         Company.printProduct();

@@ -2,17 +2,12 @@
  * Created by Roy Molina on 01-16-24
  *
  * Inventory Management System
- *    - Allows users to add, remove, and check on products at will
- *    - Input validation to not allow mis-inputs
- *    - Object-Oriented Parallel arrayLists
+ *    - Stores name, SKU, quantity, and price of every product
+ *    - Allows users to add, remove, and print list of products at will
+ *    - Input validation to store correct values
+ *    - Object-Oriented Approach with Inventory Class and simplified Main Method
  *
- *
- *                      LEGEND
- *    GREEN - no immediate need, purely for optimization / user interaction experience
- *    YELLOW - needs fixing when possible - program works but have the potential to mess up for user
- *    RED - needs fixing NOW - program will not work without it
- *
- * Latest Version : v1.0 (01-21-24)
+ * Latest Version : v1.2 (03-02-24)
  */
 
 import java.util.*;
@@ -20,8 +15,8 @@ import java.util.*;
 public class Main {
 
     //static objects for use in all methods
-    public static Inventory Company = new Inventory();
     public static Scanner user = new Scanner(System.in);
+    public static ArrayList<Inventory> productList = new ArrayList<>();
 
     public static void main(String[] args) {
 
@@ -48,7 +43,7 @@ public class Main {
                     removeStock();
                     break;
                 case 3:
-                    Company.printProduct(); //runs the Inventory Class print method, displaying all stock
+                    printStock();
                 case 0:
                     System.out.println("Thanks for using IMS"); // farewell message
                     break;
@@ -60,87 +55,128 @@ public class Main {
         }while (choice != 0);
     }
 
+    //add product to the arrayList
     public static void addStock() {
 
-        // object and variable declaration
-        String code;
+        //variable declaration
+        String name;
+        int id;
         int amount;
+        int cost;
         char exit;
 
         //loop to allow the user to input until they're satisfied
         do {
-            System.out.print("Input the product followed by it's amount.");
+            System.out.print("Enter Product Name: ");
+            name = user.next();
 
-            System.out.print("\nProduct: ");
-            code = user.next();
-            code.toLowerCase(); // convert letters to lowercase for ASCII value
-            System.out.print("\nAmount: ");
+            System.out.print("Enter Product SKU: ");
+            id = user.nextInt();
+            id = idCheck(id);
+
+            System.out.print("Enter Product Quantity: ");
             amount = user.nextInt();
+            amount = amountCheck(amount);
 
-            Company.addProduct(code, amount);
+            System.out.print("Enter Product Price: ");
+            cost = user.nextInt();
+            cost = costCheck(cost);
 
+            //input into arraylist of products
+            productList.add(new Inventory(name, id, amount, cost));
 
             //give user the option to stop input
             do {
                 System.out.println("Input another product? Y / N");
                 exit = user.next().charAt(0);
-                Character.toLowerCase(exit); // convert to lowercase to simply while statement
+                Character.toLowerCase(exit); // convert to lowercase to simplify while statement
             }while (exit != 'y' && exit != 'n');
 
         }while (Character.compare(exit, 'n') != 0);
 
-        System.out.println("Successfully Inputted: ");
-        Company.printProduct();
     }
 
-
+    //remove product from the arrayList
     public static void removeStock() {
 
-        //variable for user input
-        int index, choice;
+        //variable declaration
+        int choice;
+        int i = 0;
+        int target = 0;
 
-        //print the current inventory stock alongside numbers for the user to select from
-        Company.printProduct();
+        //print product list for user to select which sku
+        printStock();
+        System.out.println("Please input the SKU of the product you'd like to remove: ");
+        choice = user.nextInt();
 
-        System.out.println("Please input the number of which product you'd like to modify: ");
-
-        // allow the user to select which product they're erasing
-        index = user.nextInt();
-        //subtract 1 to match the actual index of where the product is in the array
-        index -= 1;
-
-        /**
-         * YELLOW
-         * Input validation either here in in the object's method
-         * User can currently input an invalid number and throw an exception for out of range
-         * 01-23-24
-         */
-
-        //input validation for choice of what user would like to do with selected product
-        do {
-            System.out.println("Select your intent: ");
-            System.out.println("1. Remove Product \n2. Remove Quantity");
-            choice = user.nextInt();
-
-            if (choice != 1 && choice != 2)
-            {
-                System.out.println("Not a valid option, try again");
-            }
-        }while (choice != 1 && choice != 2);
-
-        switch (choice)
+        for (Inventory c: productList)
         {
-            case 1:
-                Company.removeProduct(index);
-                break;
-            case 2:
-                Company.changeStock(index);
-            default:
-                System.out.println("Not a valid option, try again");
+            int id = c.getSku();
+            if (choice == id)
+            {
+                target = i;
+            }
+            i++;
         }
 
-        System.out.println("Updated Stock List: ");
-        Company.printProduct();
+        productList.remove(target);
+    }
+
+    //print stock of all items in the ArrayList
+    public static void printStock() {
+
+        //variable declaration
+        int i = 1;
+
+        //loop to step through arrayList
+        for (Inventory c: productList)
+        {
+            System.out.println("\n" + i + ". ");
+            c.printProduct();
+            i++;
+        }
+    }
+
+    //sku check
+    public static int idCheck(int id)
+    {
+        if ( (id < 1 ) || (id > 999) )
+        {
+            do {
+                System.out.print("SKU cannot be less than 1 or greater than 999. Please re-enter SKU: ");
+                id = user.nextInt();
+            }while ( (id < 1 ) || (id > 1000) );
+        }
+
+        return id;
+    }
+
+    //quantity check
+    public static int amountCheck(int amount)
+    {
+        if ( (amount < 1) || (amount > 99999) )
+        {
+            do {
+                System.out.print("Quantity cannot be less than 1 or greater than 99,999. Please re-enter Quantity: ");
+                amount = user.nextInt();
+            }while ( (amount < 1) || (amount > 99999) );
+        }
+
+        return amount;
+    }
+
+    //price check
+    public static int costCheck(int cost)
+    {
+        if (cost < 1)
+        {
+            do {
+                System.out.print("Price cannot be negative or 0. Please re-enter Price: ");
+                cost = user.nextInt();
+            }while (cost < 1);
+        }
+
+        return cost;
     }
 
 }

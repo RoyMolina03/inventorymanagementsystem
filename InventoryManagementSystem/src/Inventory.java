@@ -1,48 +1,70 @@
 import java.util.*;
 
 public class Inventory {
-    /**
-     *    YELLOW
-     *    Get some exception handlers in here
-     *    lets make the program display an error message instead of terminating
-     *    01-17-24
-     */
-    public static Scanner user = new Scanner(System.in);
 
-    //private data members as Arrays so users can control their size
-    private ArrayList<String> productCode = new ArrayList<>();
-    private ArrayList<Integer> productQuantity = new ArrayList<>();
+    //private variable declarations
+    private String name; //one word with no whitespace
+    private int sku; //int that ranges between 0 < n < 1000
+    private int quantity; //quantity that ranges between 0 < n < 10,000
+    private int price; //non-negative price
 
-
-    //lets user create a product and input an amount
-    public void addProduct(String code, int amount) {
-        productCode.add(code);
-        productQuantity.add(amount);
+    //default constructor
+    public Inventory(String usrName, int id, int amount, int cost){
+        this.name = usrName;
+        this.sku = id;
+        this.quantity = amount;
+        this.price = cost;
     }
 
-
-    //allows users to remove a product, and it's associated quantity
-    public void removeProduct(int index) {
-
-        productCode.remove(index);
-        productQuantity.remove(index);
+    //setter methods
+    public void setName(String usrName)
+    {
+        this.name = usrName;
     }
 
-    public void changeStock(int index){
-
-        System.out.println("Enter the desired amount you'd like to remove:");
-        int amount = user.nextInt();
-        amount = (productQuantity.get(index) - amount);
-
-        productQuantity.set(index, amount);
+    public void setSku(int id)
+    {
+        this.sku =  id;
     }
 
+    public void setQuantity(int amount)
+    {
+        this.quantity = amount;
+    }
+
+    public void setPrice(int cost)
+    {
+        this.price = cost;
+    }
+
+    //getter methods
+    public String getName()
+    {
+        return name;
+    }
+
+    public int getSku()
+    {
+        return sku;
+    }
+
+    public int getQuantity()
+    {
+        return quantity;
+    }
+
+    public int getPrice()
+    {
+        return price;
+    }
+
+    //print method
     public void printProduct() {
-        //loop steps through the parallel arrayLists and prints them along with an index number for easy user reference
-        for (int i = 0; i < productCode.size(); i++)
-        {
-            System.out.println("\n" + (i + 1) + ". " + productCode.get(i) + "\t\t" + productQuantity.get(i) + "\n");
-        }
+
+        System.out.print("Product Name: " + name
+                + "\nProduct SKU: " + sku
+                + "\nProduct Quantity: " + quantity
+                + "\nProduct Price: $" + price);
 
     }
 }

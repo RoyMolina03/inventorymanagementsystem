@@ -1,15 +1,17 @@
 /**
  * Created by Roy Molina on 01-16-24
  *
- * Inventory Management System
+ * Inventory.Inventory Management System
  *    - Stores name, SKU, quantity, and price of every product
  *    - Allows users to add, remove, and print list of products at will
  *    - Input validation to store correct values
- *    - Object-Oriented Approach with Inventory Class and simplified Main Method
+ *    - Object-Oriented Approach with Inventory.Inventory Class and simplified Main Method
  *
  * Latest Version : v1.2 (03-02-24)
  */
 
+import Inventory.*;
+import Util.*;
 import java.util.*;
 
 public class Main {
@@ -25,10 +27,10 @@ public class Main {
 
         //menu loop - loop terminates once user decides to input the kill code
         do {
-            System.out.println("Welcome to IMS (Inventory Management System)! Please input the number corresponding with the menu choice you'd like to select.");
-            System.out.println("1. Input Inventory");
+            System.out.println("Welcome to IMS (Inventory.Inventory Management System)! Please input the number corresponding with the menu choice you'd like to select.");
+            System.out.println("1. Input Inventory.Inventory");
             System.out.println("2. Remove inventory");
-            System.out.println("3. Check Inventory");
+            System.out.println("3. Check Inventory.Inventory");
             System.out.println("0. Quit Program");
 
             choice = user.nextInt();

@@ -7,7 +7,7 @@
  *    - Input validation to store correct values
  *    - Object-Oriented Approach with Inventory.Inventory Class and simplified Main Method
  *
- * Latest Version : v1.2 (03-02-24)
+ * Latest Version : v2.0 (09-??-24)
  */
 
 import Inventory.*;
@@ -25,12 +25,12 @@ public class Main {
         //int for menu choice
         int choice;
 
-        //menu loop - loop terminates once user decides to input the kill code
+        //menu loop - loop terminates once user decides to input the kill command
         do {
-            System.out.println("Welcome to IMS (Inventory.Inventory Management System)! Please input the number corresponding with the menu choice you'd like to select.");
-            System.out.println("1. Input Inventory.Inventory");
+            System.out.println("Welcome to IMS (Inventory Management System)! Please input the number corresponding with the menu choice you'd like to select.");
+            System.out.println("1. Input Inventory");
             System.out.println("2. Remove inventory");
-            System.out.println("3. Check Inventory.Inventory");
+            System.out.println("3. Check Inventory");
             System.out.println("0. Quit Program");
 
             choice = user.nextInt();

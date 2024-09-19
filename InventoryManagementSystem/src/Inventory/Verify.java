@@ -1,15 +1,30 @@
 package Inventory;
 
-import java.util.Scanner;
+import java.util.*;
 
 //purpose of this class is to use modular code to check inputs instead of having to make a method in each class
 public class Verify {
 
     public static Scanner user = new Scanner(System.in);
 
-    public String checkWords(String words)
+    public String checkWords(String words) //string needs to be one word with no whitespace
     {
+        boolean space = false;
+        for (int i = 0; i < words.length(); i++) //stepping through the string and checking for whitespace
+        {
+            char temp = words.charAt(i);
+            if (temp == ' ')
+            {
+                space = true;
+            }
+        }
 
+        while (space) //while a whitespace is found
+        {
+            System.out.println("Product name cannot contain a whitespace. Please enter name of product once again: ");
+            words = user.nextLine();
+            words = checkWords(words);
+        }
 
         return words;
     }

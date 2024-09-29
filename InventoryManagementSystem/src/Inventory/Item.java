@@ -19,11 +19,18 @@ public class Item {
         this.price = 0;
     }
 
-    public Item(String words, int code, int amount, int cost)
+    public Item(String words, int id, int amount, int cost)
     {
+        words = test.checkWords(words);
         this.name = words;
-        this.sku = code;
+
+        id = test.checkID(id);
+        this.sku = id;
+
+        amount = test.checkAmount(amount);
         this.quantity = amount;
+
+        cost = test.checkPrice(cost);
         this.price = cost;
     }
 

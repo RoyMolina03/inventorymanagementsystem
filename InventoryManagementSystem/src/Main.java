@@ -18,7 +18,7 @@ public class Main {
 
     //static objects for use in all methods
     public static Scanner user = new Scanner(System.in);
-    public static ArrayList<Inventory> productList = new ArrayList<>();
+    public static Inventory stock = new Inventory();
 
     public static void main(String[] args) {
 
@@ -67,118 +67,20 @@ public class Main {
         int cost;
         char exit;
 
-        //loop to allow the user to input until they're satisfied
-        do {
-            System.out.print("Enter Product Name: ");
-            name = user.next();
-
-            System.out.print("Enter Product SKU: ");
-            id = user.nextInt();
-            id = idCheck(id);
-
-            System.out.print("Enter Product Quantity: ");
-            amount = user.nextInt();
-            amount = amountCheck(amount);
-
-            System.out.print("Enter Product Price: ");
-            cost = user.nextInt();
-            cost = costCheck(cost);
-
-            //input into arraylist of products
-            //productList.add(new Inventory());
-
-            //give user the option to stop input
-            do {
-                System.out.println("Input another product? Y / N");
-                exit = user.next().charAt(0);
-                Character.toLowerCase(exit); // convert to lowercase to simplify while statement
-            }while (exit != 'y' && exit != 'n');
-
-        }while (Character.compare(exit, 'n') != 0);
+        //rework
 
     }
 
     //remove product from the arrayList
     public static void removeStock() {
 
-        //variable declaration
-        int choice;
-        int i = 0;
-        int target = 0;
-
-        //print product list for user to select which sku
-        printStock();
-        System.out.println("Please input the SKU of the product you'd like to remove: ");
-        choice = user.nextInt();
-
-        for (Inventory c: productList)
-        {
-            int id = c.getSku();
-            if (choice == id)
-            {
-                target = i;
-            }
-            i++;
-        }
-
-        productList.remove(target);
+        //rework
     }
 
     //print stock of all items in the ArrayList
     public static void printStock() {
 
-        //variable declaration
-        int i = 1;
-
-        //loop to step through arrayList
-        for (Inventory c: productList)
-        {
-            System.out.println("\n" + i + ". ");
-            c.printProduct();
-            i++;
-        }
-    }
-
-    //sku check
-    public static int idCheck(int id)
-    {
-        if ( (id < 1 ) || (id > 999) )
-        {
-            do {
-                System.out.print("SKU cannot be less than 1 or greater than 999. Please re-enter SKU: ");
-                id = user.nextInt();
-            }while ( (id < 1 ) || (id > 1000) );
-        }
-
-        return id;
-    }
-
-    //quantity check
-    public static int amountCheck(int amount)
-    {
-        if ( (amount < 1) || (amount > 99999) )
-        {
-            do {
-                System.out.print("Quantity cannot be less than 1 or greater than 99,999. Please re-enter Quantity: ");
-                amount = user.nextInt();
-            }while ( (amount < 1) || (amount > 99999) );
-        }
-
-        return amount;
-    }
-
-    //price check
-    public static int costCheck(int cost)
-    {
-        if (cost < 1)
-        {
-            do {
-                System.out.print("Price cannot be negative or 0. Please re-enter Price: ");
-                cost = user.nextInt();
-            }while (cost < 1);
-        }
-
-        return cost;
+        //rework
     }
 
 }

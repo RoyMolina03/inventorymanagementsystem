@@ -12,6 +12,11 @@ public class Inventory {
         stock.insertAtFront(data);
     }
 
+    public Inventory(){
+        //nothing goes here
+    }
+
+
 
 
     

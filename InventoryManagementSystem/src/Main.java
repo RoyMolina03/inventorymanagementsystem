@@ -85,7 +85,7 @@ public class Main {
             cost = costCheck(cost);
 
             //input into arraylist of products
-            productList.add(new Inventory(name, id, amount, cost));
+            //productList.add(new Inventory());
 
             //give user the option to stop input
             do {

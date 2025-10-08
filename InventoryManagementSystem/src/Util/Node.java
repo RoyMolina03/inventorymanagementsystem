@@ -2,11 +2,11 @@ package Util;
 import Inventory.*;
 
 public class Node {
-    Item data = new Item();
+    Object data = new Item();
     Node prev;
     Node next;
 
-    public Node(Item data)
+    public Node(Object data)
     {
         this.data = data;
         this.prev = null;
